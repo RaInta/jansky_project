@@ -48,28 +48,7 @@ def get_craigs_full_uri(topic, cat_code, full_browse=False, query_string="", loc
         return url_base + "/search/" + cat_code[topic][1] + "?" + cat_code[topic][2]
 
 
-#def craigs_topic_to_html(topic, cat_code):
-#    """docstring for craigs_topic_to_html"""
-#    url_topic = get_craigs_full_uri(topic, cat_code)
-#    craigs = requests.get(url_topic)
-#    if craigs.status_code == 200:
-#        craigs_soup = BeautifulSoup(craigs.text, "html.parser")
-#        topic_title = craigs_soup.title.string.title()
-#        # Craigslist links thankfully have a specific CSS class attribute:
-#        topic_url_list = craigs_soup.find_all("a", class_="result-title hdrlnk")
-#        # Generate some pretty-printed HTML
-#        title_pretty = "<h3>" + topic_title + "</h3>\n"
-#        topic_url_pretty = [f"<p class='odd_para'>{str(x)}</p>\n" for x in topic_url_list]
-#        html_body = title_pretty
-#        html_body += "\n".join(topic_url_pretty)
-#        html_body += "\n<hr>\n"
-#        if not len(topic_url_list):
-#            html_body = ""
-#        return html_body
-#    else:
-#        out_str = f"Warning! Connection to Craigslist topic {topic} was refused with error code {craigs.status_code}"
-#        print(out_str)
-#        return "<h2 class='warning'>" + out_str + "</h2>\n"
+
 
 
 def craigs_topic_to_html(topic, cat_code):
