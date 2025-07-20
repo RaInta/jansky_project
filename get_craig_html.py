@@ -39,13 +39,15 @@ def get_craigs_full_uri(topic, cat_code, full_browse=False, query_string="", loc
     is prepended by '/search/' then the TLI only, plus a 'postedToday=1' flag."""
 
     url_base = f"https://{location}.craigslist.org"
-    # Over-ride dictionary version of query if explicitly specified
+    # Over-ride dictionary version of query if explicitly specified.
+    # Don't mutate the original dictionary entry so we can safely reuse it.
+    topic_entry = cat_code[topic]
     if query_string:
-        cat_code[topic] = query_string
+        topic_entry = (topic_entry[0], topic_entry[1], query_string)
     if full_browse:
-        return url_base + "/d/" + cat_code[topic][0] + "/search/" + cat_code[topic][1]
+        return url_base + "/d/" + topic_entry[0] + "/search/" + topic_entry[1]
     else:
-        return url_base + "/search/" + cat_code[topic][1] + "?" + cat_code[topic][2]
+        return url_base + "/search/" + topic_entry[1] + "?" + topic_entry[2]
 
 
 
